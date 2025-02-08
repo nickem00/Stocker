@@ -17,6 +17,8 @@ import morgan from 'morgan';
 import { stockRouter } from './routes/stockRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
 
 /**
  * The __filename constant holds the absolute path of the current module file.
@@ -34,6 +36,15 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+const server = createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+    }
+});
+
+
 
 /**
  * Middleware to parse incoming JSON requests.
@@ -82,6 +93,16 @@ app.get('/', (req, res) => {
  */
 app.use('/api/stocks', stockRouter);
 
+io.on('connection', (socket) => {
+    console.log('🔌 New client connected!');
+
+    socket.on('disconnect', () => {
+        console.log('🔌 Client disconnected');
+    });
+})
+
+export { io };
+
 // The port number on which the server will listen for incoming requests.
 const PORT = process.env.PORT || 3000;
 
@@ -91,6 +112,6 @@ const PORT = process.env.PORT || 3000;
  * 
  * @param {number} PORT - The port number on which the server will listen for incoming requests.
  */
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`✅ Servern körs på http://localhost:${PORT}`);
 });

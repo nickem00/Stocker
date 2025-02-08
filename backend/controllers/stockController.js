@@ -7,12 +7,12 @@
  */
 
 import { error } from 'console';
+import { io } from '../app.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import yahooFinance from 'yahoo-finance2';
 import { exec } from 'child_process';
-
 
 // __filename is a variable that contains the full path and filename of the current module file.
 // It is useful for getting the current file's path.
@@ -62,6 +62,25 @@ export const getAllStocks = (req, res) => {
 
 yahooFinance.suppressNotices(['yahooSurvey', 'ripHistorical'])
 
+
+
+
+/**
+ * @function addStock
+ * @description This function handles the HTTP POST request to add a new stock or update an existing one.
+ * It fetches stock data from Yahoo Finance, processes it, and saves it to a JSON file.
+ * If the stock symbol is not provided, it sends a 400 error response.
+ * If there is an error during the process, it sends a 500 error response.
+ * 
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} res - The HTTP response object.
+ * 
+ * @returns {Promise<void>}
+ * 
+ * @example
+ * // Example usage in an Express route
+ * app.post('/api/stocks', addStock);
+ */
 export const addStock = async (req, res) => {
     // console.log("🔍 Request Headers:", req.headers);
     // console.log("🔍 Request body:", req.body);
@@ -286,6 +305,23 @@ export const addStock = async (req, res) => {
 
 
 
+
+
+/**
+ * @function openJsonFolder
+ * @description This function handles the HTTP GET request to open the folder containing the JSON file with stock data.
+ * It determines the operating system and executes the appropriate command to open the folder.
+ * If there is an error during the process, it sends a response indicating the error.
+ * 
+ * @param {Object} req - The HTTP request object.
+ * @param {Object} res - The HTTP response object.
+ * 
+ * @returns {void}
+ * 
+ * @example
+ * // Example usage in an Express route
+ * app.get('/api/open-json-folder', openJsonFolder);
+ */
 export const openJsonFolder = (req, res) => {
     console.log("📂 Open JSON request recieved..");
 
@@ -308,4 +344,43 @@ export const openJsonFolder = (req, res) => {
         console.log("📂 Folder opened successfully.");
         return res.json({ message: "Folder opened successfully" });
     })
+}
+
+
+
+
+
+export const updateStocks = async (req, res) => {
+    console.log("🔄 Updating all stocks...");
+
+    try {
+        if (!fs.existsSync(dataFilePath)) {
+            return res.status(404).json({ error: 'Stock data file not found' });
+        }
+
+        const fileData = fs.readFileSync(dataFilePath, 'utf-8');
+        let stocks = JSON.parse(fileData);
+
+        if (!Array.isArray(stocks) || stocks.length === 0) {
+            return res.status(404).json({ error: 'No stock data found' });
+        }
+
+        let updatedCount = 0;
+        const totalStocks = stocks.length;
+
+        for (let stock of stocks) {
+            console.log(`🔄 Updating stock: ${stock.Symbol}`);
+
+            await addStock({ body: { symbol: stock.Symbol } }, { json: () => {} });
+
+            updatedCount++;
+            io.emit('stockUpdateProgress', { message: `${updatedCount} of ${totalStocks} stocks updated...` });
+        }
+
+        console.log("✅ All stocks updated successfully.");
+        res.json({ message: "All stocks updated successfully" });
+    } catch (error) {
+        console.error("❌ Error in updateStocks():", error);
+        res.status(500).json({ error: "Failed to update stock data" });
+    }
 }

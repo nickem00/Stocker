@@ -149,7 +149,7 @@ main {
   /* background-color: darkred; */
   text-align: center;
   opacity: 0;
-  transition: opacity 0.2s ease-in;
+  transition: opacity 1s ease-in-out;
 }
 
 .add-stock-section h3 {
