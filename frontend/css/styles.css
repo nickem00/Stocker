@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Global Settings */
+
+/* Variables */
+:root {
+  /* Colors */
+  --background-color: #F4F3EE;
+  --font-color: #463F3A;
+  --font-color-light: #F4F3EE;
+
+  /* Button Colors */
+  --btn-color-orange: #ecc178;
+  --btn-color-brown: #463f3a;
+  --btn-border-color: #c99335b0;
+
+  /* Input Field Colors */
+  --input-field-color: #bcb8b1e3;
+  --input-placeholder-color: #5e6d6d;
+  --input-action-border-color: #ffba43;
+  --input-action-background-color: #b6b2ace3;
+
+  /* Additional Styling */
+  --border-radius: 5px;
+  --box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
+  --font-family: 'Space Mono', monospace, sans-serif;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+/* Style for radio buttons */
+input[type="radio"] {
+  accent-color: var(--font-color);
+}
+
+body {
+  font-family: 'Space Mono', monospace, sans-serif; /* Use only 'Space Mono' */
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: var(--background-color);
+  color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ======= Header ======= */
+header {
+margin-top: 7rem;
+}
+
+header h1 {
+  font-size: 4rem;
+  font-weight: normal;
+  color: var(--font-color);
+}
+
+/* ======= Main ======== */
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+/* ------- Add Stock Section -------- */
+.add-stock-section {
+  /* background-color: darkred; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#add-stock-div {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+/* input field for stock symbol */
+#input-stock {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--btn-border-color);
+  border-radius: 1rem;
+  background-color: var(--input-field-color);
+  color: var(--font-color); /* Actual entered text appears in this darker color */
+  cursor: text;
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+  width: 25rem;
+}
+
+/* Set placeholder text color */
+#input-stock::placeholder {
+  color: var(--input-placeholder-color);
+}
+
+#input-stock:focus {
+  outline: none;
+  border: 1px solid var(--input-action-border-color);
+  background-color: var(--input-action-background-color);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+#input-stock:hover {
+  border: 1px solid var(--input-action-border-color);
+  background-color: var(--input-action-background-color);
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+
+#add-stock-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--btn-border-color);
+  border-radius: 1rem;
+  background-color: var(--btn-color-orange);
+  color: var(--font-color);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+  font-weight: bold;
+  width: 6rem;
+}
+
+#add-stock-btn:hover {
+  background-color: #c9a465;
+  border: 1px solid var(--input-action-border-color);
+}
+
+#feedback-message {
+  margin-top: 1rem;
+  min-height: 2rem;
+  /* background-color: darkred; */
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.add-stock-section h3 {
+  /* margin-top: 1rem; */
+  font-weight: normal;
+  color: var(--font-color);
+}
+
+#add-stock-radio-btn {
+  display: flex;
+  gap: 2rem;
+}
+
+
+
+/* ------- Tools Section ------- */
+.tools-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.tools-section h2 {
+  font-size: 2rem;
+  font-weight: normal;
+  color: var(--font-color);
+}
+
+#tools-hr {
+  width: 70%;
+  margin-top: 1rem;
+  border: none;
+  height: 2px;
+  background: linear-gradient(to right, 
+      transparent 5%,  /* Starta fade tidigare */
+      var(--font-color) 10%,  /* Font color börjar vid 15% */
+      var(--font-color) 90%,  /* Font color slutar vid 85% */
+      transparent 95%  /* Fade slutar senare */
+  );
+}
+
+.tools-section button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--btn-border-color);
+  border-radius: 1rem;
+  background-color: var(--btn-color-brown);
+  color: var(--font-color-light);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+  width: 10rem;
+}
+
+.tools-section button:hover {
+  background-color: #5f5b59;
+  border: 1px solid var(--input-action-border-color);
+}
+
+.tools-buttons {
+  display: flex;
+  justify-content: space-around;
+  /* align-items: stretch; */
+  margin-top: 1rem;
+  gap: 1rem;
+  width: 35%;
+}

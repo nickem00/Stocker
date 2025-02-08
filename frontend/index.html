@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stocker</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">Stocker</a></h1>
+    </header>
+    
+    <main>
+        <section class="add-stock-section">
+
+            <div id="add-stock-div">
+                <input type="text" name="stock-symbol" id="input-stock" placeholder="Enter stock symbol..">
+                <button id="add-stock-btn">Add</button>
+            </div>
+
+            <p id="feedback-message"></p>
+
+            <h3>Stock market:</h3>
+
+            <div id="add-stock-radio-btn">
+
+                <div>
+                    <input type="radio" id="us-stocks-radio" name="stock-type" value="us">
+                    <label for="us-stocks-radio">US</label>
+                </div>
+
+                <div>
+                    <input type="radio" id="swedish-stocks-radio" name="stock-type" value="swedish">
+                    <label for="swedish-stocks-radio">Swedish</label>
+                </div>
+
+            </div>
+        </section>
+        <section class="tools-section">
+            <h2>Tools</h2>
+            <hr id="tools-hr">
+            <div class="tools-buttons">
+                <button id="update-btn">Update</button>
+                <button id="show-all-btn">Show Stocks</button>
+                <button id="open-json-btn">Open JSON</button>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
