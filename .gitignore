@@ -25,3 +25,5 @@ Thumbs.db
 # Nodemon files (if you have a nodemon.json or other temporary process files)
 .nodemonignore
 
+# Other
+other/
