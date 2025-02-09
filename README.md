@@ -81,6 +81,13 @@ Stocker/
 
 ---
 
+## Screenshots 📸
+
+![Stocker](assets/screenshots/screenshot.png)
+
+
+---
+
 ## Future Improvements and Enhancements ✨
 
 - **User Authentication:** Add login functionality and user profiles.
